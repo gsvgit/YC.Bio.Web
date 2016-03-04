@@ -57,6 +57,14 @@
     </ItemGroup>
   </Target>
   <ItemGroup>
+    <Reference Include="IntelliFactory.Formlets">
+      <HintPath>..\packages\WebSharper.Formlets.3.6.8.75\lib\net40\IntelliFactory.Formlets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IntelliFactory.Reactive">
+      <HintPath>..\packages\IntelliFactory.Reactive.3.6.7.68\lib\net40\IntelliFactory.Reactive.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="IntelliFactory.Xml">
       <HintPath>..\packages\IntelliFactory.Xml.0.6.63.95\lib\net40\IntelliFactory.Xml.dll</HintPath>
       <Private>True</Private>
@@ -85,6 +93,10 @@
     </Reference>
     <Reference Include="WebSharper.Core.JavaScript">
       <HintPath>..\packages\WebSharper.3.6.10.230\lib\net40\WebSharper.Core.JavaScript.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebSharper.Formlets">
+      <HintPath>..\packages\WebSharper.Formlets.3.6.8.75\lib\net40\WebSharper.Formlets.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WebSharper.Html.Client">
