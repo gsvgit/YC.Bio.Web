@@ -47,8 +47,8 @@ module Client =
                 let! y = wsfc.Input "90" |> wsfe.WithTextLabel "-" |>  wsfd.Validator.IsInt "Enter numericr value"  |> wsfe.WithValidationIcon
                 return (int x, int y)
             }
-            |> wsff.Horizontal
-            |> wsfe.WithFormContainer           
+            |> wsff.Horizontal            
+            |> wsfe.WithCustomFormContainer({wsfe.FormContainerConfiguration.Default with CssClass=Some"tomiddle"})           
             
         let left =
             wsff.Do {
@@ -75,7 +75,7 @@ module Client =
             }
         |> wsff.Horizontal
         |> wsfe.WithSubmitButton        
-        //|> wsfe.WithFormContainer
+        |> wsfe.WithCustomFormContainer({wsfe.FormContainerConfiguration.Default with CssClass=Some"totop"})
      
     let Main () =
 
