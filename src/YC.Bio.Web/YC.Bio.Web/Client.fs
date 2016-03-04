@@ -8,6 +8,7 @@ module wsfc = WebSharper.Formlets.Controls
 module wsfe = WebSharper.Formlets.Enhance
 module wsfd = WebSharper.Formlets.Data
 module wsff = WebSharper.Formlets.Formlet
+module wsfl = WebSharper.Formlets.Layout
 
 [<JavaScript>]
 module Client =
@@ -42,34 +43,40 @@ module Client =
     let frm =
         let length =
             wsff.Do {                
-                let! x = wsfc.Input "60" |> wsfe.WithTextLabel "Length limit:" //|>  wsfd.Validator.IsInt "In"  |> wsfe.WithValidationIcon
-                let! y =  wsfc.Input "100" |> wsfe.WithTextLabel "-" //|>  wsfd.Validator.IsInt ""  |> wsfe.WithValidationIcon
+                let! x = wsfc.Input "60" |> wsfe.WithTextLabel "Length limit:" |>  wsfd.Validator.IsInt "Enter numericr value"  |> wsfe.WithValidationIcon
+                let! y = wsfc.Input "90" |> wsfe.WithTextLabel "-" |>  wsfd.Validator.IsInt "Enter numericr value"  |> wsfe.WithValidationIcon
                 return (int x, int y)
-            }            
+            }
             |> wsff.Horizontal
+            |> wsfe.WithFormContainer           
             
-
         let left =
-            wsff.Do {                
-                let! x = wsfc.TextArea "" |> wsfe.WithTextLabel "Input" |> wsfe.WithLabelAbove |> wsfe.WithFormContainer
+            wsff.Do {
+                let! x = 
+                    wsfc.TextArea ""                    
+                    |> wsfe.WithTextLabel "Input"
+                    |> wsfe.WithLabelAbove 
+                    |> wsfe.WithCustomFormContainer({wsfe.FormContainerConfiguration.Default with CssClass=Some"withTextArea"})
                 let! y = length
                 return (x, y)
-            }  
-            |> wsff.Vertical
-            |> wsfe.WithFormContainer
+            }
+            |> wsff.Vertical            
                     
-        let right = wsfc.TextArea text |> wsfe.WithTextLabel "Grammar" |> wsfe.WithLabelAbove |> wsfe.WithFormContainer
+        let right = 
+            wsfc.TextArea text
+            |> wsfe.WithTextLabel "Grammar"
+            |> wsfe.WithLabelAbove
+            |> wsfe.WithCustomFormContainer({wsfe.FormContainerConfiguration.Default with CssClass=Some"withTextArea"})
         
-        wsff.Do {                
+        wsff.Do {
             let! x = left
-            let! y = right                                             
+            let! y = right                                           
             return (x, y)
             }
         |> wsff.Horizontal
         |> wsfe.WithSubmitButton        
-        |> wsfe.WithFormContainer
+        //|> wsfe.WithFormContainer
      
-
     let Main () =
 
         let output = H1 []
@@ -80,8 +87,7 @@ module Client =
                     output.Text <- data
                 }
                 |> Async.Start)
-                    
-        let str = TextArea [Attr.Style "width:670px; height:520px"]
+                            
         let inputFrame = 
             Div[
                 lengthSpec

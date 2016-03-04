@@ -21,7 +21,7 @@ module Templating =
         Content.Template<Page>("~/Main.html")
             .With("title", fun x -> x.Title)
             .With("menubar", fun x -> x.MenuBar)
-            .With("body", fun x -> x.Body)
+            .With("body", fun x -> x.Body)            
 
     // Compute a menubar where the menu item for the given endpoint is active
     let MenuBar (ctx: Context<EndPoint>) endpoint =
